@@ -1,0 +1,30 @@
+The configuration could be made more complex with MTA. For some reason this
+has not worked for me as of move to BB. The fetchmail can be configured to
+work without an MTA, and the step #0 reflects this, making the step #1
+optional.
+
+0) Fetchmail configuration
+
+poll mapi
+proto imap
+user "the_user"
+pass "the_pass"
+fetchall
+ssl
+limit 0
+mda "/usr/bin/procmail -m /home/bopetrovic/.procmailrc"
+
+1) Make sure the postfix (MTA) is up and running
+   a) check for /etc/postfix/main.cf
+   b) if not there:
+      sudo echo "myhostname <hostname>" > /etc/postfix/main.cf
+   c) sudo postfix status
+   d) sudo postfix start
+   e) telnet localhost 25
+
+2) Make sure that procmail (MDA) is configured
+   a) sudo apt-get install procmail
+   b) For Postfix piping add to /etc/postfix/main.cf:
+      mailbox_command = /usr/bin/procmail -a "$EXTENSION"
+   c) create initial $HOME/.procmailrc file
+      (a sample can be found in man procmail)

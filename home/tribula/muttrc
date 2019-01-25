@@ -1,0 +1,31 @@
+set folder = "~/mail/storage/mail"
+set record = "~/mail/storage/mail"
+set spoolfile = "~/mail/storage/mail"
+
+mailboxes = ~/mail/storage/mail
+
+set my_user       = bopetrovic
+set realname      = "Boban Petrovic"
+set from          = "Boban Petrovic <bopetrovic@corp.com>"
+
+# SMTP Corporate Configuration
+set smtp_url            = smtp://$my_user@mapi:587
+set ssl_force_tls       = yes
+set smtp_authenticators = "login"
+
+# Simple address book
+# use A to add email to it, and TAB on To: Cc: Bcc: lines to retrieve it
+source ~/.mutt-alias
+set alias_file = ~/.mutt-alias
+
+# Set vi as default editor
+set editor=vim
+
+auto_view text/calendar
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+set sort = threads
+set sort_aux = last-date-received
+
+folder-hook . push "<delete-pattern>~=<enter>"
