@@ -1,0 +1,3 @@
+" Remove trailing white spaces in .c and .h files
+autocmd BufWritePre *.c :%s/\s\+$//e
+autocmd BufWritePre *.h :%s/\s\+$//e
